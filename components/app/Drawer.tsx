@@ -1,4 +1,7 @@
 import React, { Dispatch, SetStateAction } from "react";
+import { LogoutIcon } from "@heroicons/react/outline";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 interface DrawerProps {
   children: React.ReactNode;
@@ -7,6 +10,8 @@ interface DrawerProps {
 }
 
 const Drawer = ({ children, drawer, setDrawer }: DrawerProps) => {
+  const { data: session } = useSession();
+
   return (
     <main
       className={
@@ -22,6 +27,24 @@ const Drawer = ({ children, drawer, setDrawer }: DrawerProps) => {
           (drawer ? " translate-x-0 " : " -translate-x-full ")
         }
       >
+        <div className="p-3 border-b text-sm flex justify-between items-center">
+          <div className="flex items-center gap-x-3">
+            <Image
+              alt="user profile picture"
+              src={session!.user.image || ""}
+              width={30}
+              height={30}
+              className="rounded-full"
+            />
+
+            <p>반갑습니다, {session!.user.name}님</p>
+          </div>
+
+          <div className="hoverAnimation w-7 h-7 center-xy p-0">
+            <LogoutIcon className="w-5 h-5" />
+          </div>
+        </div>
+
         {children}
       </section>
 
