@@ -33,7 +33,11 @@ const ProjectMenu = ({ projectId, detail }: Props) => {
   };
 
   return (
-    <article className={`${style.container} mb-5  text-gray-400`}>
+    <article
+      className={`${style.container} mb-5 ${
+        detail && "w-[250px]"
+      } text-gray-400`}
+    >
       <div className="flex flex-col gap-y-3 capitalize">
         {menu.map((name, i) => (
           <div

@@ -12,6 +12,7 @@ import { useGetUserQuery, useUpdateUserMutation } from "../apiSlice";
 // types
 import type { NextPage } from "next";
 import { User } from "../types";
+import ProjectList from "../components/projectInfo/ProjectList";
 
 const Home: NextPage = () => {
   //
@@ -54,7 +55,10 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <PageContainer></PageContainer>
+      <PageContainer>
+        <ProjectList title="진행 중인 프로젝트" />
+        <ProjectList title="종료된 프로젝트" closed />
+      </PageContainer>
     </div>
   );
 };

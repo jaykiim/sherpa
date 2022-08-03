@@ -32,8 +32,16 @@ export const apiSlice = createApi({
       }),
       providesTags: ["Projects"],
     }),
+
+    getProject: builder.query<Project, string>({
+      query: (projectId) => `/projects/${projectId}`,
+    }),
   }),
 });
 
-export const { useGetUserQuery, useUpdateUserMutation, useGetProjectsQuery } =
-  apiSlice;
+export const {
+  useGetUserQuery,
+  useUpdateUserMutation,
+  useGetProjectsQuery,
+  useGetProjectQuery,
+} = apiSlice;
