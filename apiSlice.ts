@@ -6,5 +6,3 @@ export const apiSlice = createApi({
   tagTypes: [],
   endpoints: (builder) => ({}),
 });
-
-export const {} = apiSlice;
