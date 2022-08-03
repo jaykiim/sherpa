@@ -46,7 +46,9 @@ const PageContainer = ({ children, projectId }: Props) => {
         </div>
       </Drawer>
 
-      <div className={projectId ? "flex min-h-screen" : "pageContainer"}>
+      <div
+        className={projectId ? "flex gap-x-10 min-h-screen" : "pageContainer"}
+      >
         {projectId && <ProjectMenu projectId={projectId} detail />}
         {childrenWithProps}
       </div>

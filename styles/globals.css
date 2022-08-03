@@ -26,7 +26,11 @@
   }
 
   .pageContainer {
-    @apply flex flex-col mx-auto max-w-[1500px] h-screen px-4 py-6 gap-y-10 border-gray-light;
+    @apply flex flex-col mx-auto max-w-[1400px] h-screen px-4 py-6 gap-y-10 border-gray-light;
+  }
+
+  .contentsContainer {
+    @apply pageContainer py-0 sm:p-0 mt-5 flex-1;
   }
 
   /*  
