@@ -10,9 +10,7 @@ import { Subheading, BtnEdit, KeyResult, BtnNewField } from "../";
 
 // types
 import { KeyResult as KeyResultType } from "../../types";
-
-const getRandomColor = () =>
-  "#" + Math.round(Math.random() * 0xffffff).toString(16);
+import { toolkit } from "../../utils";
 
 /* ========================================================================================================================================================================================================================================================
 ? 컴포넌트 설명 
@@ -20,7 +18,7 @@ overview 또는 프로젝트 생성 모달의 key results 파트 전체
 ======================================================================================================================================================================================================================================================== */
 
 interface Props {
-  defaultVal: KeyResultType[]; // 기존 저장되있던 값 (overview 에서만 넘어옴)
+  defaultVal?: KeyResultType[]; // 기존 저장되있던 값 (overview 에서만 넘어옴)
   input: KeyResultType[];
   setInput: React.Dispatch<React.SetStateAction<KeyResultType[]>>;
 }
@@ -52,7 +50,7 @@ const KeyResultContainer = ({ defaultVal, input, setInput }: Props) => {
       ...krArr,
       {
         id: nanoid(),
-        color: getRandomColor(),
+        color: toolkit.getRandomColor(),
         name: "",
         projectId: projectId as string,
         tools: { plans: [], tasks: [] },
@@ -63,7 +61,7 @@ const KeyResultContainer = ({ defaultVal, input, setInput }: Props) => {
   // 수정 취소
   const cancelWrite = () => {
     setWrite(false);
-    setInput(defaultVal);
+    setInput(defaultVal!);
   };
 
   // 서버 전송
@@ -124,7 +122,7 @@ const KeyResultContainer = ({ defaultVal, input, setInput }: Props) => {
           </>
         ) : (
           <div className="max-h-[150px] overflow-y-auto">
-            {defaultVal.map(singleKr)}
+            {defaultVal!.map(singleKr)}
           </div>
         )}
       </div>

@@ -38,6 +38,18 @@ export const apiSlice = createApi({
       providesTags: ["Project"],
     }),
 
+    updateProject: builder.mutation<
+      string,
+      { userId?: string; project: Project }
+    >({
+      query: ({ userId, project }) => ({
+        url: `/projects/${project.id}`,
+        method: "PATCH",
+        body: { userId, project },
+      }),
+      invalidatesTags: ["Projects", "Project", "User"],
+    }),
+
     // TODO keyresults ================================================================================================================================================================================
 
     getKeyResults: builder.query<KeyResult[], string>({
@@ -68,6 +80,7 @@ export const {
   useUpdateUserMutation,
   useGetProjectsQuery,
   useGetProjectQuery,
+  useUpdateProjectMutation,
   useGetKeyResultsQuery,
   useUpdateKeyResultsMutation,
 } = apiSlice;

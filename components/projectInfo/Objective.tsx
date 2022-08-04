@@ -5,9 +5,12 @@ interface Props {
   input: string;
   setInput: React.Dispatch<React.SetStateAction<string>>;
   defaultVal?: string; // 기존 저장되있던 값 (프로젝트 상세페이지에서만 넘어옴)
+  onSubmit: (
+    setWrite: React.Dispatch<React.SetStateAction<boolean>>
+  ) => Promise<void>;
 }
 
-const Objective = ({ input, setInput, defaultVal }: Props) => {
+const Objective = ({ input, setInput, defaultVal, onSubmit }: Props) => {
   //
   // 수정 버튼 클릭 여부
   const [write, setWrite] = useState(false);
@@ -22,7 +25,7 @@ const Objective = ({ input, setInput, defaultVal }: Props) => {
           <BtnEdit
             write={write}
             setWrite={setWrite}
-            onSubmit={() => {}}
+            onSubmit={() => onSubmit(setWrite)}
             onCancel={() => {
               setWrite(false);
               setInput(defaultVal);

@@ -14,4 +14,7 @@ const sortProject = (projects: Project[]) => {
   return { closed, inProgress };
 };
 
-export default { sortProject };
+const getRandomColor = () =>
+  "#" + Math.round(Math.random() * 0xffffff).toString(16);
+
+export default { sortProject, getRandomColor };

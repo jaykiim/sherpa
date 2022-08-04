@@ -14,6 +14,7 @@ export { default as CarouselCard } from "./util/CarouselCard";
 export { default as Subheading } from "./util/Subheading";
 export { default as InputUnderlineSpread } from "./util/InputUnderlineSpread";
 export { default as DateSelector } from "./util/DateSelector";
+export { default as Modal } from "./util/Modal";
 
 // projectInfo
 export { default as Objective } from "./projectInfo/Objective";
@@ -22,6 +23,7 @@ export { default as ProjectsNavContainer } from "./projectInfo/ProjectsNavContai
 export { default as ProjectsNav } from "./projectInfo/ProjectsNav";
 export { default as ProjectMenu } from "./projectInfo/ProjectMenu";
 export { default as ProjectCard } from "./projectInfo/ProjectCard";
+export { default as NewProjectForm } from "./projectInfo/NewProjectForm";
 
 // keyresult
 export { default as KeyResult } from "./keyresult/KeyResult";

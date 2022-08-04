@@ -5,8 +5,12 @@ import { useRouter } from "next/router";
 import { Objective, Period, KeyResultContainer } from "../";
 
 // hooks
-import { useGetKeyResultsQuery, useGetProjectQuery } from "../../apiSlice";
-import { KeyResult } from "../../types";
+import {
+  useGetKeyResultsQuery,
+  useGetProjectQuery,
+  useUpdateProjectMutation,
+} from "../../apiSlice";
+import { KeyResult, Project } from "../../types";
 
 const Overview = () => {
   //
@@ -41,6 +45,28 @@ const Overview = () => {
 
   // * -----------------------------------------------------------------------------------------------------------------------------------------------
 
+  const [updateProject] = useUpdateProjectMutation();
+  const onSubmit = async (
+    setWrite: React.Dispatch<React.SetStateAction<boolean>>
+  ) => {
+    if (!project) return;
+    console.log("onSubmit");
+
+    const reqbody: Project = {
+      ...project,
+      name: objective,
+      start: period.start,
+      end: period.end,
+    };
+
+    try {
+      await updateProject({ project: reqbody });
+      setWrite(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="contentsContainer">
       {project && (
@@ -49,11 +75,13 @@ const Overview = () => {
             input={objective}
             setInput={setObjective}
             defaultVal={project.name}
+            onSubmit={onSubmit}
           />
           <Period
             input={period}
             setInput={setPeriod}
             defaultVal={{ start: project.start, end: project.end }}
+            onSubmit={onSubmit}
           />
 
           {keyresultsData && (

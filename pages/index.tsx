@@ -12,6 +12,7 @@ import { useGetUserQuery, useUpdateUserMutation } from "../apiSlice";
 import type { NextPage } from "next";
 import { User } from "../types";
 import ProjectList from "../components/projectInfo/ProjectList";
+import { useEffect } from "react";
 
 const Home: NextPage = () => {
   //
@@ -43,9 +44,9 @@ const Home: NextPage = () => {
     }
   };
 
-  // useEffect(() => {
-  //   addUser();
-  // }, [user]);
+  useEffect(() => {
+    addUser();
+  }, [user]);
 
   return (
     <div className="">
