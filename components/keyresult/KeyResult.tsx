@@ -25,8 +25,6 @@ const KeyResult = ({
   const deleteKr = (id: string) =>
     setKrArr((krArr) => krArr.filter((kr) => kr.id !== id));
 
-  console.log(color);
-
   return (
     <div className="group flex items-center gap-x-2">
       {/*  */}
@@ -62,7 +60,7 @@ const KeyResult = ({
           )}
         </>
       ) : (
-        <p>{value}</p>
+        <p className="text-sm mt-2 pb-2">{value}</p>
       )}
     </div>
   );

@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import { nanoid } from "@reduxjs/toolkit";
 import { useRouter } from "next/router";
 
+// hooks
+import { useUpdateKeyResultsMutation } from "../../apiSlice";
+
 // components
-import { Subheading, BtnEdit, KeyResult } from "../";
+import { Subheading, BtnEdit, KeyResult, BtnNewField } from "../";
 
 // types
 import { KeyResult as KeyResultType } from "../../types";
-import BtnNewField from "../util/BtnNewField";
 
 const getRandomColor = () =>
   "#" + Math.round(Math.random() * 0xffffff).toString(16);
@@ -26,7 +28,7 @@ interface Props {
 const KeyResultContainer = ({ defaultVal, input, setInput }: Props) => {
   //
   // 현재 프로젝트 아이디
-  const { projectId } = useRouter().query;
+  const { id: projectId } = useRouter().query;
 
   //
   const [write, setWrite] = useState(false);
@@ -64,6 +66,20 @@ const KeyResultContainer = ({ defaultVal, input, setInput }: Props) => {
     setInput(defaultVal);
   };
 
+  // 서버 전송
+  const [updateKeyResults] = useUpdateKeyResultsMutation();
+  const onSubmit = async () => {
+    //
+    try {
+      //
+      await updateKeyResults({ projectId: projectId as string, krArr: input });
+      setWrite(false);
+      //
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   //
   const singleKr = (kr: KeyResultType) => (
     <KeyResult
@@ -85,7 +101,7 @@ const KeyResultContainer = ({ defaultVal, input, setInput }: Props) => {
           <BtnEdit
             write={write}
             setWrite={setWrite}
-            onSubmit={() => {}}
+            onSubmit={onSubmit}
             onCancel={cancelWrite}
             disable={false}
           />
