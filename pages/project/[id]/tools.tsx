@@ -4,12 +4,10 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { getServerSideProps } from "../../../lib/serverprops";
 
-// components
-import { PageContainer, Overview } from "../../../components";
+import { PageContainer } from "../../../components";
 
-const OverviewPage: NextPage = () => {
+const ToolsPage: NextPage = () => {
   const { id } = useRouter().query;
-
   return (
     <div>
       <Head>
@@ -18,7 +16,7 @@ const OverviewPage: NextPage = () => {
       </Head>
 
       <PageContainer projectId={id as string}>
-        <Overview />
+        <></>
       </PageContainer>
     </div>
   );
@@ -26,4 +24,4 @@ const OverviewPage: NextPage = () => {
 
 export { getServerSideProps };
 
-export default OverviewPage;
+export default ToolsPage;
