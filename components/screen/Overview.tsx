@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 // components
-import { Objective, Period } from "../";
+import { Objective, Period, KeyResultContainer } from "../";
 
 // hooks
-import { useGetProjectQuery } from "../../apiSlice";
+import { useGetKeyResultsQuery, useGetProjectQuery } from "../../apiSlice";
+import { KeyResult } from "../../types";
 
 const Overview = () => {
   //
@@ -15,16 +16,28 @@ const Overview = () => {
   // 프로젝트 정보
   const { data: project } = useGetProjectQuery(id as string);
 
+  // kr 배열 가져오기
+  const krlist = JSON.stringify(project?.keyresults || ["-1"]);
+  const { data: keyresultsData } = useGetKeyResultsQuery(krlist);
+
   // * states -----------------------------------------------------------------------------------------------------------------------------------------------
 
   // objective 수정 입력
-  const [objective, setObjective] = useState(project?.name || "");
+  const [objective, setObjective] = useState("");
 
   // period 수정 입력
-  const [period, setPeriod] = useState({
-    start: project?.start || "",
-    end: project?.end || "",
-  });
+  const [period, setPeriod] = useState({ start: "", end: "" });
+
+  // key result 수정 입력
+  const [keyresults, setKeyresults] = useState([{}]);
+
+  useEffect(() => {
+    if (project && keyresultsData) {
+      setObjective(project.name);
+      setPeriod({ start: project.start, end: project.end });
+      setKeyresults(keyresultsData);
+    }
+  }, [project, keyresultsData]);
 
   // * -----------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -42,6 +55,18 @@ const Overview = () => {
             setInput={setPeriod}
             defaultVal={{ start: project.start, end: project.end }}
           />
+
+          {keyresultsData && (
+            <KeyResultContainer
+              defaultVal={keyresultsData}
+              input={keyresults as KeyResult[]}
+              setInput={
+                setKeyresults as React.Dispatch<
+                  React.SetStateAction<KeyResult[]>
+                >
+              }
+            />
+          )}
         </>
       )}
     </div>

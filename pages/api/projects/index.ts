@@ -14,16 +14,16 @@ export default async function handler(
 ) {
   //
   const { projectlist } = req.query;
-  const projectarr = JSON.parse(projectlist as string);
+  const idArr = JSON.parse(projectlist as string);
 
   try {
     //
-    if (Array.isArray(projectarr) && projectarr.length) {
+    if (Array.isArray(idArr) && idArr.length) {
       //
       const q = query(
         collection(db, "projects"),
-        where(documentId(), "in", projectarr)
-      ); // projectarr 배열 요소와 일치하는 id 가진 도큐먼트 모두 쿼리
+        where(documentId(), "in", idArr)
+      ); // idArr 배열 요소와 일치하는 id 가진 도큐먼트 모두 쿼리
 
       const snap = await getDocs(q);
 

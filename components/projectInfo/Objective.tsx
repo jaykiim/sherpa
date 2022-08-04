@@ -15,8 +15,6 @@ const Objective = ({ input, setInput, defaultVal }: Props) => {
   // 입력창 보여줄 조건
   const isWriteMode = defaultVal ? (write ? true : false) : true;
 
-  console.log(defaultVal);
-
   return (
     <section className="flex flex-col gap-y-2">
       <Subheading title="objective">

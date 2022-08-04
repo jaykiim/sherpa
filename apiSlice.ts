@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { Project } from "./types";
+import { Project, KeyResult } from "./types";
 
 export const apiSlice = createApi({
   reducerPath: "api",
@@ -36,6 +36,16 @@ export const apiSlice = createApi({
     getProject: builder.query<Project, string>({
       query: (projectId) => `/projects/${projectId}`,
     }),
+
+    // TODO keyresults ================================================================================================================================================================================
+
+    getKeyResults: builder.query<KeyResult[], string>({
+      query: (keyresultList) => ({
+        url: `/keyresults`,
+        method: "GET",
+        params: { keyresultList },
+      }),
+    }),
   }),
 });
 
@@ -44,4 +54,5 @@ export const {
   useUpdateUserMutation,
   useGetProjectsQuery,
   useGetProjectQuery,
+  useGetKeyResultsQuery,
 } = apiSlice;
