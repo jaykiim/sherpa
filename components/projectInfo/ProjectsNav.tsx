@@ -14,13 +14,13 @@ interface Props {
 const ProjectsNav = ({ projects, title }: Props) => {
   return (
     <div>
-      <h3 className="text-gray-400 mb-1">{title}</h3>
+      <h3 className="text-gray-400 mb-2 font-light">{title}</h3>
 
       {projects.map((project) => (
         <ArrowDropdown
           key={project.id}
           title={project.name}
-          style={{ container: "my-3", title: "text-sm" }}
+          style={{ container: "gap-x-1", title: "text-sm text-gray-400" }}
         >
           <ProjectMenu projectId={project.id} />
         </ArrowDropdown>

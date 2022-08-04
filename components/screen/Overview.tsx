@@ -50,7 +50,6 @@ const Overview = () => {
     setWrite: React.Dispatch<React.SetStateAction<boolean>>
   ) => {
     if (!project) return;
-    console.log("onSubmit");
 
     const reqbody: Project = {
       ...project,

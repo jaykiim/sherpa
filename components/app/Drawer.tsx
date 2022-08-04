@@ -1,7 +1,10 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { createContext, Dispatch, SetStateAction } from "react";
 import { LogoutIcon } from "@heroicons/react/outline";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+
+export const DrawerContext =
+  createContext<null | Dispatch<SetStateAction<boolean>>>(null);
 
 interface DrawerProps {
   children: React.ReactNode;
@@ -45,7 +48,9 @@ const Drawer = ({ children, drawer, setDrawer }: DrawerProps) => {
           </div>
         </div>
 
-        {children}
+        <DrawerContext.Provider value={setDrawer}>
+          {children}
+        </DrawerContext.Provider>
       </section>
 
       <section

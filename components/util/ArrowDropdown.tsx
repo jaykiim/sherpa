@@ -13,7 +13,7 @@ interface Props {
 }
 
 const ArrowDropdown = ({ children, title, style }: Props) => {
-  const [open, setopen] = useState(true);
+  const [open, setopen] = useState(false);
 
   return (
     <>
