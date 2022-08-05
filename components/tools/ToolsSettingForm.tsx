@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 
 // components
 import { ModalSubmitHeader, ToolsToggle } from "../";
 
 // hooks
-import { useGetKeyResultQuery } from "../../apiSlice";
+import {
+  useGetKeyResultQuery,
+  useUpdateKeyResultMutation,
+} from "../../apiSlice";
+import { KeyResult, RootProps } from "../../types";
+import { ModalContext } from "../util/Modal";
 
 export interface CheckedTools {
   [index: string]: boolean;
@@ -34,9 +39,29 @@ const ToolsSettingForm = () => {
   // 현재 체크한 도구 상태
   const [checked, setChecked] = useState<CheckedTools>(allToolsMap);
 
-  //
-  const onSubmit = async () => {};
-  const disabled = false;
+  // * 서버 저장 ------------------------------------------------------------------------------------------------------------------------------------------------
+
+  const [updateKeyResult, { isLoading }] = useUpdateKeyResultMutation();
+
+  const setModal = useContext(ModalContext);
+
+  const onSubmit = async () => {
+    //
+    if (!selectedKr) return;
+
+    const checkedArr = Object.keys(checked).filter((tool) => checked[tool]);
+    const reqbody: KeyResult = { ...selectedKr, tools: checkedArr };
+
+    try {
+      await updateKeyResult(reqbody);
+      setModal!({ desc: "", size: "", open: false });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // 저장 불가 조건
+  const disabled = !selectedKr || isLoading;
 
   return (
     <div>

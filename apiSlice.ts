@@ -4,7 +4,7 @@ import { Project, KeyResult } from "./types";
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
-  tagTypes: ["User", "Projects", "Project", "KeyResults"],
+  tagTypes: ["User", "Projects", "Project", "KeyResults", "KeyResult"],
   endpoints: (builder) => ({
     //
     // TODO user ================================================================================================================================================================================
@@ -63,6 +63,7 @@ export const apiSlice = createApi({
 
     getKeyResult: builder.query<KeyResult, string>({
       query: (krId) => `/keyresults/${krId}`,
+      providesTags: ["KeyResult"],
     }),
 
     updateKeyResults: builder.mutation<
@@ -76,6 +77,15 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["Project", "KeyResults"],
     }),
+
+    updateKeyResult: builder.mutation<string, KeyResult>({
+      query: (kr) => ({
+        url: `/keyresults/${kr.id}`,
+        method: "PATCH",
+        body: { kr },
+      }),
+      invalidatesTags: ["KeyResult", "KeyResults"],
+    }),
   }),
 });
 
@@ -88,4 +98,5 @@ export const {
   useGetKeyResultsQuery,
   useGetKeyResultQuery,
   useUpdateKeyResultsMutation,
+  useUpdateKeyResultMutation,
 } = apiSlice;
