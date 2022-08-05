@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { Project, KeyResult } from "./types";
+import { Project, KeyResult, Task } from "./types";
 
 export const apiSlice = createApi({
   reducerPath: "api",
@@ -86,6 +86,16 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["KeyResult", "KeyResults"],
     }),
+
+    // TODO tasks ================================================================================================================================================================================
+
+    getTasks: builder.query<Task[], string>({
+      query: (krId) => ({
+        url: `/tasks`,
+        method: "GET",
+        params: { krId },
+      }),
+    }),
   }),
 });
 
@@ -99,4 +109,5 @@ export const {
   useGetKeyResultQuery,
   useUpdateKeyResultsMutation,
   useUpdateKeyResultMutation,
+  useGetTasksQuery,
 } = apiSlice;

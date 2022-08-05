@@ -16,6 +16,7 @@ export { default as InputUnderlineSpread } from "./util/InputUnderlineSpread";
 export { default as DateSelector } from "./util/DateSelector";
 export { default as Modal } from "./util/Modal";
 export { default as ModalSubmitHeader } from "./util/ModalSubmitHeader";
+export { default as Table } from "./util/Table";
 
 // projectInfo
 export { default as Objective } from "./projectInfo/Objective";
@@ -43,6 +44,14 @@ export { default as PlannerContainer } from "./planner/PlannerContainer";
 
 // tasker
 export { default as TaskerContainer } from "./tasker/TaskerContainer";
+
+// tasktable
+export { default as TaskTableContainer } from "./tasker/tasktable/TaskTableContainer";
+export { default as TableRows } from "./tasker/tasktable/TableRows";
+export { default as TableCell } from "./tasker/tasktable/TableCell";
+
+// timer
+export { default as TimerContainer } from "./tasker/timer/TimerContainer";
 
 // screen
 export { default as Overview } from "./screen/Overview";

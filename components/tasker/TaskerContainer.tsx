@@ -1,7 +1,14 @@
 import React from "react";
 
+// components
+import { TaskTableContainer } from "../";
+
 const TaskerContainer = () => {
-  return <div>TaskerContainer</div>;
+  return (
+    <div>
+      <TaskTableContainer />
+    </div>
+  );
 };
 
 export default TaskerContainer;

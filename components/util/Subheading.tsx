@@ -1,10 +1,7 @@
 import React from "react";
 
-// components
-import { BtnEdit, BtnMinus } from "../";
-
 interface Props {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   title: string;
 }
 
