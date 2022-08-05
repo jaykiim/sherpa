@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // components
-import { PlannerContainer, TaskerContainer, ToolsMenu } from "../";
+import { PlannerContainer, TaskerContainer, ToolsMenu, NoTools } from "../";
 
 // types
 import { KeyResult, Modal } from "../../types";
@@ -15,6 +15,10 @@ const ToolsContainer = ({ selectedKr, setModal }: Props) => {
   //
   const [selectedMenu, setSelectedMenu] = useState(selectedKr.tools[0]);
 
+  useEffect(() => {
+    setSelectedMenu(selectedKr.tools[0]);
+  }, [selectedKr]);
+
   // selectedMenu 에 따라 보여줄 컴포넌트
   const showTool = () => {
     switch (selectedMenu) {
@@ -23,6 +27,9 @@ const ToolsContainer = ({ selectedKr, setModal }: Props) => {
 
       case "tasker":
         return <TaskerContainer />;
+
+      default:
+        return <NoTools />;
     }
   };
 

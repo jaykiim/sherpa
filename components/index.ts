@@ -36,6 +36,7 @@ export { default as ToolsContainer } from "./tools/ToolsContainer";
 export { default as ToolsSettingForm } from "./tools/ToolsSettingForm";
 export { default as ToolsToggle } from "./tools/ToolsToggle";
 export { default as ToolsMenu } from "./tools/ToolsMenu";
+export { default as NoTools } from "./tools/NoTools";
 
 // planner
 export { default as PlannerContainer } from "./planner/PlannerContainer";
