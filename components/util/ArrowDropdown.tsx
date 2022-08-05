@@ -16,7 +16,7 @@ const ArrowDropdown = ({ children, title, style }: Props) => {
   const [open, setopen] = useState(false);
 
   return (
-    <>
+    <div>
       <div
         className={
           "flex items-center gap-x-2 text-sm uppercase sm:text-lg " +
@@ -41,7 +41,7 @@ const ArrowDropdown = ({ children, title, style }: Props) => {
       </div>
 
       {open && children}
-    </>
+    </div>
   );
 };
 

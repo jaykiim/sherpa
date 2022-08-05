@@ -1,8 +1,14 @@
-import React, { createContext, useState } from "react";
+import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 
 // components
-import { ProjectsNavContainer, ProjectMenu, Modal, NewProjectForm } from "../";
+import {
+  ProjectsNavContainer,
+  ProjectMenu,
+  Modal,
+  NewProjectForm,
+  ToolsSettingForm,
+} from "../";
 
 // components
 import { Drawer, Header, Login } from "../index";
@@ -10,7 +16,7 @@ import { Modal as ModalType } from "../../types";
 
 interface Props {
   children: React.ReactNode;
-  projectId?: string;
+  projectId?: string; // 프로젝트 상세 페이지에서만 넘어옴
   style?: string;
 }
 
@@ -24,6 +30,19 @@ const PageContainer = ({ children, projectId }: Props) => {
     size: "",
     open: false,
   });
+
+  // 모달 컨텐츠
+  const modalContents = () => {
+    //
+
+    switch (modal.desc) {
+      case "newProject":
+        return <NewProjectForm />;
+
+      case "tools":
+        return <ToolsSettingForm />;
+    }
+  };
 
   // 드로어 열림 닫힘
   const [drawer, setDrawer] = useState(false);
@@ -52,7 +71,7 @@ const PageContainer = ({ children, projectId }: Props) => {
       </Drawer>
 
       <Modal modal={modal} setModal={setModal}>
-        {modal.desc === "newProject" && <NewProjectForm setModal={setModal} />}
+        {modalContents()}
       </Modal>
 
       <div

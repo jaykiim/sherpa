@@ -53,7 +53,9 @@ const KeyResultContainer = ({ defaultVal, input, setInput }: Props) => {
         color: toolkit.getRandomColor(),
         name: "",
         projectId: projectId as string,
-        tools: { plans: [], tasks: [] },
+        tools: [],
+        plans: [],
+        tasks: [],
       },
     ]);
   };

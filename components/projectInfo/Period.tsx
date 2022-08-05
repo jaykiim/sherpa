@@ -12,7 +12,7 @@ interface Props {
     }>
   >;
   defaultVal?: { start: string; end: string }; // 기존에 저장되있던 값 (상세페이지에서만 넘어옴)
-  onSubmit: (
+  onSubmit?: (
     setWrite: React.Dispatch<React.SetStateAction<boolean>>
   ) => Promise<void>;
 }
@@ -31,7 +31,7 @@ const Period = ({ defaultVal, input, setInput, onSubmit }: Props) => {
           <BtnEdit
             write={write}
             setWrite={setWrite}
-            onSubmit={() => onSubmit(setWrite)}
+            onSubmit={() => onSubmit!(setWrite)}
             onCancel={() => {
               setWrite(false);
               setInput(defaultVal);

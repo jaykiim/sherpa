@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import { nanoid } from "@reduxjs/toolkit";
 import { useSession } from "next-auth/react";
 
 // components
-import { Objective, Period, KeyResultContainer } from "../";
+import { Objective, Period, KeyResultContainer, ModalSubmitHeader } from "../";
 
 // hooks
 import {
@@ -13,28 +13,28 @@ import {
 } from "../../apiSlice";
 
 // types
-import { KeyResult, Modal, Project } from "../../types";
+import { KeyResult, Project } from "../../types";
 import { toolkit } from "../../utils";
+import { ModalContext } from "../util/Modal";
 
-interface Props {
-  setModal: React.Dispatch<React.SetStateAction<Modal>>;
-}
-
-const NewProjectForm = ({ setModal }: Props) => {
+const NewProjectForm = () => {
   //
   const projectId = nanoid();
-  const initKr = [
+  const initKr: KeyResult[] = [
     {
       id: nanoid(),
       name: "",
       color: toolkit.getRandomColor(),
       projectId,
-      tools: { plans: [], tasks: [] },
+      tools: [],
+      plans: [],
+      tasks: [],
     },
   ];
 
   const router = useRouter();
   const { data: session } = useSession();
+  const setModal = useContext(ModalContext);
 
   // * states ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -74,7 +74,7 @@ const NewProjectForm = ({ setModal }: Props) => {
       setObjective("");
       setKeyresults(initKr);
       setPeriod({ start: "", end: "" });
-      setModal((s) => ({ ...s, open: false }));
+      setModal!((s) => ({ ...s, open: false }));
       router.push(`/project/${project.id}`);
       //
     } catch (error) {
@@ -96,20 +96,11 @@ const NewProjectForm = ({ setModal }: Props) => {
       {/*  */}
       {/* TODO 헤더 */}
 
-      <section className="flex items-center border-b border-gray-light ">
-        <h1 className="p-3 font-bold uppercase sm:text-lg">New Project</h1>
-
-        <button
-          disabled={disabled}
-          onClick={onSubmit}
-          className={`ml-auto mr-3 btn-sm btn-hover-red btn-rounded ${
-            disabled &&
-            "hover:bg-white hover:text-gray-400 hover:border-gray-300 cursor-not-allowed"
-          }`}
-        >
-          제출
-        </button>
-      </section>
+      <ModalSubmitHeader
+        title="New Project"
+        disabled={disabled}
+        onSubmit={onSubmit}
+      />
 
       <form className="flex flex-1 flex-col px-3 py-6 gap-y-7 tracking-wide sm:p-6 overflow-y-auto">
         {/*  */}

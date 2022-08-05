@@ -1,5 +1,8 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React, { createContext, Dispatch, SetStateAction } from "react";
 import { Modal } from "../../types";
+
+export const ModalContext =
+  createContext<null | Dispatch<SetStateAction<Modal>>>(null);
 
 interface Props {
   children: React.ReactNode;
@@ -20,7 +23,9 @@ const Modal = ({ children, modal, setModal }: Props) => {
       <section
         className={`${modal.size} rounded-lg bg-white center-xy-absolute shadow-xl transition-all transform delay-400 duration-500 ease-in-out `}
       >
-        {children}
+        <ModalContext.Provider value={setModal}>
+          {children}
+        </ModalContext.Provider>
       </section>
       <section
         className="w-screen h-full cursor-pointer"

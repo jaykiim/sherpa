@@ -30,7 +30,7 @@
   }
 
   .contentsContainer {
-    @apply pageContainer py-0 sm:p-0 mt-5 flex-1;
+    @apply pageContainer py-0 sm:p-0 sm:mr-3 mt-5 flex-1;
   }
 
   /*  
@@ -65,6 +65,10 @@
 
   .btn-hover-gradient {
     @apply bg-gradient-to-r hover:from-red-400 hover:to-blue-400 hover:text-white transform duration-200;
+  }
+
+  .btn-outline-rounded {
+    @apply btn-rounded btn-sm btn-hover-red lg:btn-md;
   }
 
   /*  

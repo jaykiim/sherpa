@@ -61,6 +61,10 @@ export const apiSlice = createApi({
       providesTags: ["KeyResults"],
     }),
 
+    getKeyResult: builder.query<KeyResult, string>({
+      query: (krId) => `/keyresults/${krId}`,
+    }),
+
     updateKeyResults: builder.mutation<
       string,
       { projectId: string; krArr: KeyResult[] }
@@ -82,5 +86,6 @@ export const {
   useGetProjectQuery,
   useUpdateProjectMutation,
   useGetKeyResultsQuery,
+  useGetKeyResultQuery,
   useUpdateKeyResultsMutation,
 } = apiSlice;

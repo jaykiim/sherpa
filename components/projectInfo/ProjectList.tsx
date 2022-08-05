@@ -84,7 +84,7 @@ const ProjectList = ({ title, closed, setModal }: Props) => {
 
             <button
               onClick={addNewProject}
-              className="hidden btn-rounded btn-sm btn-hover-red sm:inline-block lg:btn-md"
+              className="btn-outline-rounded hidden sm:inline-block"
             >
               + 새 프로젝트
             </button>

@@ -5,12 +5,18 @@ import { KeyResult } from "../../types";
 interface Props {
   id: string;
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   color: string;
-  isWriteMode: boolean;
-  krArr: KeyResult[];
-  setKrArr: React.Dispatch<React.SetStateAction<KeyResult[]>>;
+  isWriteMode?: boolean;
+  krArr?: KeyResult[];
+  setKrArr?: React.Dispatch<React.SetStateAction<KeyResult[]>>;
+  style?: string;
 }
+
+/* ================================================================================================================================================
+? 컴포넌트 설명
+KeyResultList에서 사용할 경우 수정이 없으므로 onChange, isWriteMode, krArr, setKrArr 안들어오고 style 들어올 수 있음
+================================================================================================================================================ */
 
 const KeyResult = ({
   id,
@@ -20,13 +26,15 @@ const KeyResult = ({
   isWriteMode,
   krArr,
   setKrArr,
+  style,
 }: Props) => {
   //
+  //
   const deleteKr = (id: string) =>
-    setKrArr((krArr) => krArr.filter((kr) => kr.id !== id));
+    setKrArr!((krArr) => krArr.filter((kr) => kr.id !== id));
 
   return (
-    <div className="group flex items-center gap-x-2">
+    <div className={"group flex items-center gap-x-2 " + style}>
       {/*  */}
       {/* TODO kr 색상 */}
 
@@ -50,7 +58,7 @@ const KeyResult = ({
 
           {/* TODO 제거 */}
 
-          {krArr.length !== 1 && (
+          {krArr!.length !== 1 && (
             <div
               onClick={() => deleteKr(id)}
               className="hidden ml-auto group-hover:block"
