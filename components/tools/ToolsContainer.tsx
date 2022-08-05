@@ -34,7 +34,7 @@ const ToolsContainer = ({ selectedKr, setModal }: Props) => {
   };
 
   return (
-    <div className="pt-5">
+    <div className="pt-1">
       <header className="flex items-center justify-between">
         <ToolsMenu
           selectedKr={selectedKr}

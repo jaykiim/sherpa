@@ -12,13 +12,14 @@ interface Props extends RootProps {
 
 const Tools = ({ keyresults, setModal }: Props) => {
   const [selectedKrId, setSelectedKrId] = useState(keyresults[0].id);
+  console.log(selectedKrId);
 
   const selectedKr = keyresults.find(
     (kr) => kr.id === selectedKrId
   ) as KeyResultType;
 
   return (
-    <div className="contentsContainer divide-y">
+    <div className="contentsContainer gap-y-2 divide-y">
       <KeyResultList
         keyresults={keyresults}
         selectedKr={selectedKrId}

@@ -38,7 +38,7 @@ export default async function handler(
       }
       //
       else {
-        res.status(200).json([]);
+        throw new Error();
       }
       //
     } catch (error) {

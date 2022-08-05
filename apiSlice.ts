@@ -4,7 +4,7 @@ import { Project, KeyResult, Task } from "./types";
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
-  tagTypes: ["User", "Projects", "Project", "KeyResults", "KeyResult"],
+  tagTypes: ["User", "Projects", "Project", "KeyResults", "KeyResult", "Task"],
   endpoints: (builder) => ({
     //
     // TODO user ================================================================================================================================================================================
@@ -95,6 +95,19 @@ export const apiSlice = createApi({
         method: "GET",
         params: { krId },
       }),
+      providesTags: ["Task"],
+    }),
+
+    updateTasks: builder.mutation<
+      string,
+      { keyresultId: string; tasks: Task[] }
+    >({
+      query: ({ keyresultId, tasks }) => ({
+        url: `/tasks`,
+        method: "PATCH",
+        body: { keyresultId, tasks },
+      }),
+      invalidatesTags: ["Task"],
     }),
   }),
 });
@@ -110,4 +123,5 @@ export const {
   useUpdateKeyResultsMutation,
   useUpdateKeyResultMutation,
   useGetTasksQuery,
+  useUpdateTasksMutation,
 } = apiSlice;

@@ -93,3 +93,19 @@ export interface Modal {
   size: string;
   open: boolean;
 }
+
+// table -------------------------------------------------------------------------
+
+export interface TableContext<ValueType> {
+  write?: boolean;
+  values?: ValueType[];
+  setValues?: React.Dispatch<React.SetStateAction<ValueType[]>>;
+  error?: string;
+  setError?: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export interface TableHead {
+  name: string;
+  width: number;
+  edit?: string;
+}
