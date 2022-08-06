@@ -10,11 +10,13 @@ import { useGetTasksQuery, useUpdateTasksMutation } from "../../../apiSlice";
 // types
 import { Task } from "../../../types";
 
-const TaskTableContainer = () => {
+interface Props {
+  tasks: Task[];
+}
+
+const TaskTableContainer = ({ tasks }: Props) => {
   //
-  // 데이터 패치
   const selectedKr = localStorage.getItem("kr");
-  const { data: tasks } = useGetTasksQuery(selectedKr!);
 
   // * 입력 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -22,11 +24,7 @@ const TaskTableContainer = () => {
   const [write, setWrite] = useState(false);
 
   // 입력값 상태
-  const [taskInputs, setTaskInputs] = useState(tasks || []);
-
-  useEffect(() => {
-    if (tasks) setTaskInputs(tasks);
-  }, [tasks]);
+  const [taskInputs, setTaskInputs] = useState(tasks);
 
   // 유효성 에러
   const [error, setError] = useState("");
@@ -72,7 +70,7 @@ const TaskTableContainer = () => {
   // 입력 취소
   const onCancel = () => {
     setWrite(false);
-    setTaskInputs(tasks!); // tasks 가 존재해야 수정 버튼이 렌더되므로 수정 버튼 > 취소 클릭 시점엔 tasks 무조건 존재
+    setTaskInputs(tasks);
     setError("");
   };
 
@@ -101,63 +99,59 @@ const TaskTableContainer = () => {
 
   return (
     <div>
-      {tasks && (
-        <>
-          <Subheading title="task table">
-            <BtnEdit
+      <Subheading title="task table">
+        <BtnEdit
+          write={write}
+          setWrite={setWrite}
+          onSubmit={onSubmit(taskInputs)}
+          onCancel={onCancel}
+          disable={disable}
+        />
+      </Subheading>
+
+      {/* TODO 에러 메세지 */}
+
+      <div className="my-3 text-xs text-red-600">{error}</div>
+
+      {/* TODO 테이블 헤드 로우 */}
+
+      <TableHead write={write} />
+
+      {/* TODO 테이블 그냥 로우 */}
+
+      {write
+        ? taskInputs.map((task) => (
+            <TableRow
+              key={task.id}
+              task={task}
               write={write}
-              setWrite={setWrite}
-              onSubmit={onSubmit(taskInputs)}
-              onCancel={onCancel}
-              disable={disable}
+              taskInputs={taskInputs}
+              setTaskInputs={setTaskInputs}
+              onTaskChange={onTaskChange}
             />
-          </Subheading>
+          ))
+        : tasks.map((task) => (
+            <TableRow
+              key={task.id}
+              task={task}
+              write={write}
+              taskInputs={taskInputs}
+              setTaskInputs={setTaskInputs}
+              onTaskChange={onTaskChange}
+              onSubmit={onSubmit}
+            />
+          ))}
 
-          {/* TODO 에러 메세지 */}
+      {/* TODO 태스크 추가 */}
 
-          <div className="my-3 text-xs text-red-600">{error}</div>
-
-          {/* TODO 테이블 헤드 로우 */}
-
-          <TableHead write={write} />
-
-          {/* TODO 테이블 그냥 로우 */}
-
-          {write
-            ? taskInputs.map((task) => (
-                <TableRow
-                  key={task.id}
-                  task={task}
-                  write={write}
-                  taskInputs={taskInputs}
-                  setTaskInputs={setTaskInputs}
-                  onTaskChange={onTaskChange}
-                />
-              ))
-            : tasks.map((task) => (
-                <TableRow
-                  key={task.id}
-                  task={task}
-                  write={write}
-                  taskInputs={taskInputs}
-                  setTaskInputs={setTaskInputs}
-                  onTaskChange={onTaskChange}
-                  onSubmit={onSubmit}
-                />
-              ))}
-
-          {/* TODO 태스크 추가 */}
-
-          <div className="mt-5">
-            {write && (
-              <BtnNewField
-                handleClick={() => setTaskInputs([...taskInputs, defaultTask])}
-                desc="새 입력 추가"
-              />
-            )}
-          </div>
-        </>
-      )}
+      <div className="mt-5">
+        {write && (
+          <BtnNewField
+            handleClick={() => setTaskInputs([...taskInputs, defaultTask])}
+            desc="새 입력 추가"
+          />
+        )}
+      </div>
     </div>
   );
 };
