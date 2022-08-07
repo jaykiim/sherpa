@@ -9,11 +9,13 @@ interface Props {
   style?: {
     container?: string;
     title?: string;
+    arrow?: string;
   };
+  defaultOpen?: boolean;
 }
 
-const ArrowDropdown = ({ children, title, style }: Props) => {
-  const [open, setopen] = useState(false);
+const ArrowDropdown = ({ children, title, style, defaultOpen }: Props) => {
+  const [open, setopen] = useState(defaultOpen || false);
 
   return (
     <div>
@@ -31,7 +33,7 @@ const ArrowDropdown = ({ children, title, style }: Props) => {
             onClick={() => setopen(!open)}
             className={`w-4 h-4 duration-200 transition-all ${
               open ? "rotate-90" : "rotate-0"
-            }`}
+            } ${style?.arrow}`}
           />
         </div>
 
