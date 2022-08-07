@@ -17,11 +17,11 @@ const ToolsPage: NextPage = () => {
 
   // kr 배열 가져오기
   const krlist = JSON.stringify(project?.keyresults || ["-1"]);
-  const { data: keyresults } = useGetKeyResultsQuery(krlist);
+  const { data: keyresults } = useGetKeyResultsQuery(krlist); // 프로젝트가 아직 패치 안되서 ["-1"] 넘어가면 응답으로 빈 배열이 옴
 
   // keyresults 배열 패치 되면 첫번째 kr id 로컬스토리지에 저장
   useEffect(() => {
-    if (keyresults) {
+    if (keyresults && keyresults.length) {
       localStorage.setItem("kr", keyresults[0].id);
     }
   }, [keyresults]);
@@ -37,7 +37,7 @@ const ToolsPage: NextPage = () => {
       </Head>
 
       <PageContainer projectId={id as string}>
-        {keyresults && <Tools keyresults={keyresults} />}
+        {keyresults && keyresults.length && <Tools keyresults={keyresults} />}
       </PageContainer>
     </div>
   );
