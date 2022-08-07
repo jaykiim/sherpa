@@ -45,7 +45,7 @@ const calendar = (date: Date) => {
   for (let i = 0; i < startday; i++) result.push("");
 
   // 날짜 채우기
-  for (let i = 1; i <= monthlyDays[month]; i++) result.push(i);
+  for (let i = 1; i <= monthlyDays[month - 1]; i++) result.push(i);
 
   // 마지막 날이 토요일 전에 끝나는 경우 남은 칸을 빈칸 처리
   const remained = 7 - (result.length % 7);

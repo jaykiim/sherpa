@@ -29,7 +29,7 @@ const WeekPicker = ({ start, end, selectedDate, setSelectedDate }: Props) => {
   // years
   const years = () => {
     const result = [];
-    for (let i = startYr; i <= startYr; i++) result.push(i + " 년");
+    for (let i = startYr; i <= endYr; i++) result.push(i + " 년");
     return result;
   };
 
@@ -96,7 +96,10 @@ const WeekPicker = ({ start, end, selectedDate, setSelectedDate }: Props) => {
         const clickedMonthCurrentWeekExists =
           clickedMonthDaysByWeek.length >= weekNum + 1;
 
-        if (clickedMonthCurrentWeekExists) {
+        // 클릭한 월에 date 존재 여부
+        const dateExsists = clickedMonthDaysByWeek.flat().includes(date);
+
+        if (clickedMonthCurrentWeekExists && dateExsists) {
           // 존재하면 클릭한 월의 date 그대로 하는데
           newDate = new Date(year, clicked - 1, date);
         } else {
