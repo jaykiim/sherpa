@@ -75,14 +75,16 @@ const PlannerContainer = () => {
         </div>
       </div>
 
-      {project && (
-        <DayCardContainer
-          project={project}
-          selectedDate={selectedDate}
-          setSelectedDate={setSelectedDate}
-          view={view}
-        />
-      )}
+      <div className="max-w-[100vw]">
+        {project && (
+          <DayCardContainer
+            project={project}
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
+            view={view}
+          />
+        )}
+      </div>
     </section>
   );
 };

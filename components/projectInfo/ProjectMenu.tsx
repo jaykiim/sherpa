@@ -31,7 +31,7 @@ const ProjectMenu = ({ projectId, detail }: Props) => {
   //
   // 부모 컴포넌트에 따른 메뉴 스타일
   const style = {
-    container: detail ? "hidden bg-[#F7F6F3] m-0 sm:inline-block" : "",
+    container: detail ? "hidden bg-[#F7F6F3] m-0 sm:block" : "",
     listItem: detail ? "p-4 hover:bg-[#E8E7E4]" : "ml-6 p-1 hover:bg-gray-100",
   };
 

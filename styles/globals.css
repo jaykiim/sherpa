@@ -30,7 +30,7 @@
   }
 
   .contentsContainer {
-    @apply pageContainer py-0 sm:p-0 sm:mr-3 mt-5 flex-1;
+    @apply flex-1 flex flex-col gap-y-8 p-4 sm:ml-3 md:ml-0 xl:mx-auto xl:max-w-[1400px];
   }
 
   /*  

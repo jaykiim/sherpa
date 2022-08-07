@@ -49,7 +49,7 @@ const Home: NextPage = () => {
   }, [user]);
 
   return (
-    <div className="">
+    <div className="min-h-screen">
       <Head>
         <title>Sherpa</title>
         <link rel="icon" href="/favicon.ico" />

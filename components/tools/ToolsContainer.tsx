@@ -43,7 +43,7 @@ const ToolsContainer = ({ selectedKr, setModal }: Props) => {
         />
 
         <button
-          className="block ml-auto btn-outline-rounded "
+          className="block ml-auto btn-outline-rounded lg:btn-sm"
           onClick={() =>
             setModal!({
               desc: "tools",
@@ -55,8 +55,11 @@ const ToolsContainer = ({ selectedKr, setModal }: Props) => {
           새 도구
         </button>
       </header>
+      <p className="-translate-y-1 ml-2 text-xs text-gray-400">
+        ⚠️ PLANNER 도구는 KEY RESULTS 와 무관합니다
+      </p>
 
-      <div className="mt-5">{showTool()}</div>
+      <div className="mt-7">{showTool()}</div>
     </div>
   );
 };

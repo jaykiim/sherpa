@@ -80,7 +80,7 @@ const DayCardContainer = ({
   );
 
   return (
-    <div className="ml-1 flex max-w-[100vw] overflow-x-scroll whitespace-nowrap sm:max-w-[63vw]">
+    <div className="flex overflow-x-scroll sm:max-w-[calc(100vw_-_250px)]">
       {planner &&
         (view === "week" ? (
           currentWeekWithoutBlank.map((date, i) => (
