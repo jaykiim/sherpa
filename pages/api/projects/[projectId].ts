@@ -37,7 +37,7 @@ export default async function handler(
       const docRef = doc(db, "projects", projectId as string);
       await setDoc(docRef, project);
 
-      // * user 문서 projects 속성 수정 ---------------------------------------------------------------------------------------------------
+      // * user 문서 projects 필드 수정 ---------------------------------------------------------------------------------------------------
 
       if (userId) {
         //

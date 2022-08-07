@@ -4,7 +4,15 @@ import { Project, KeyResult, Task, Record } from "./types";
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
-  tagTypes: ["User", "Projects", "Project", "KeyResults", "KeyResult", "Task"],
+  tagTypes: [
+    "User",
+    "Projects",
+    "Project",
+    "KeyResults",
+    "KeyResult",
+    "Task",
+    "Records",
+  ],
   endpoints: (builder) => ({
     //
     // TODO user ================================================================================================================================================================================
@@ -118,6 +126,31 @@ export const apiSlice = createApi({
         method: "GET",
         params: { taskIdlist },
       }),
+      providesTags: ["Records"],
+    }),
+
+    updateRecord: builder.mutation<
+      string,
+      { record: Record; taskId?: string; selectedDate?: string }
+    >({
+      query: ({ record, taskId, selectedDate }) => ({
+        url: `/records/${record.id}`,
+        method: "PATCH",
+        body: { record, taskId, selectedDate },
+      }),
+      invalidatesTags: ["Records", "Task"],
+    }),
+
+    deleteRecord: builder.mutation<
+      string,
+      { recordId: string; taskId: string; selectedDate: string }
+    >({
+      query: ({ recordId, taskId, selectedDate }) => ({
+        url: `/records/${recordId}`,
+        method: "DELETE",
+        body: { recordId, taskId, selectedDate },
+      }),
+      invalidatesTags: ["Records", "Task"],
     }),
   }),
 });
@@ -135,4 +168,6 @@ export const {
   useGetTasksQuery,
   useUpdateTasksMutation,
   useGetRecordsQuery,
+  useUpdateRecordMutation,
+  useDeleteRecordMutation,
 } = apiSlice;

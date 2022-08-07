@@ -15,7 +15,8 @@ export { default as Subheading } from "./util/Subheading";
 export { default as InputUnderlineSpread } from "./util/InputUnderlineSpread";
 export { default as DateSelector } from "./util/DateSelector";
 export { default as Modal } from "./util/Modal";
-export { default as ModalSubmitHeader } from "./util/ModalSubmitHeader";
+export { default as DatePicker } from "./util/DatePicker";
+export { default as WeekPicker } from "./util/WeekPicker";
 
 // projectInfo
 export { default as Objective } from "./projectInfo/Objective";
@@ -51,6 +52,8 @@ export { default as TableRow } from "./tasker/tasktable/TableRow";
 
 // timer
 export { default as TimerContainer } from "./tasker/timer/TimerContainer";
+export { default as RecordContainer } from "./tasker/timer/RecordContainer";
+export { default as Record } from "./tasker/timer/Record";
 
 // screen
 export { default as Overview } from "./screen/Overview";

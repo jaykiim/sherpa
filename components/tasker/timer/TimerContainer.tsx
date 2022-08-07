@@ -1,16 +1,17 @@
-import { ClockIcon } from "@heroicons/react/outline";
-import { nanoid } from "@reduxjs/toolkit";
 import React, { useEffect, useState } from "react";
+import { moment } from "../../../utils";
 
 // components
-import { Subheading } from "../../";
+import { Subheading, DatePicker, WeekPicker, RecordContainer } from "../../";
+
+// hooks
 import { useGetRecordsQuery } from "../../../apiSlice";
 
 // types
-import { Project, Record, Task } from "../../../types";
-import { moment } from "../../../utils";
-import DatePicker from "../../util/DatePicker";
-import WeekPicker from "../../util/WeekPicker";
+import { Project, Task } from "../../../types";
+
+// styles
+import { ClockIcon } from "@heroicons/react/outline";
 
 interface Props {
   project: Project;
@@ -120,6 +121,19 @@ const TimerContainer = ({ project, tasks }: Props) => {
 
         <div className="rounded-lg center-xy py-3 text-lg font-extrabold tracking-wider md:text-xl">
           {totalTime}
+        </div>
+
+        <div>
+          {records &&
+            tasks.map((task) => (
+              <div key={task.id}>
+                <RecordContainer
+                  task={task}
+                  selectedDate={selectedDate}
+                  records={records}
+                />
+              </div>
+            ))}
         </div>
       </div>
     </div>

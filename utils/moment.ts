@@ -121,6 +121,10 @@ const projectCalendar = (selected: Date, start: string, end: string) => {
 
 // TODO 시간 합계 ==================================================================================================================================================================
 
+const prefix = (num: number) => {
+  return num.toString().length < 2 ? "0" + num : num;
+};
+
 const timeSum = (times: string[]) => {
   // times = ["1:00:23", "15:20:32", "2:07:05", "23:11:47"]
 
@@ -144,11 +148,43 @@ const timeSum = (times: string[]) => {
 
   const hour = init[0] + minRound;
 
-  const prefix = (num: number) => {
-    return num.toString().length < 2 ? "0" + num : num;
-  };
-
   return `${prefix(hour)}:${prefix(min)}:${prefix(sec)}`;
 };
 
-export default { toIsoStr, dateMap, projectCalendar, timeSum };
+// TODO 시간 뺄셈 ==================================================================================================================================================================
+
+const timeDiff = (time1: string, time2: string) => {
+  const times = [time1, time2];
+
+  const secTimes = times.map((time) => {
+    const [hr, min, sec] = time.split(":").map((unit) => +unit);
+    return hr * 3600 + min * 60 + sec;
+  });
+
+  const diff = secTimes[0] - secTimes[1];
+
+  const hours = Math.floor(diff / 3600);
+  const minutes = Math.floor(diff / 60) % 60;
+  const seconds = diff % 60;
+
+  return `${prefix(hours)}:${prefix(minutes)}:${prefix(seconds)}`;
+};
+
+// TODO 초 합계를 00:00:00 형식으로 ==================================================================================================================================================================
+
+const convertTotalsec = (sec: number) => {
+  const hours = Math.floor(sec / 3600);
+  const minutes = Math.floor(sec / 60) % 60;
+  const seconds = sec % 60;
+
+  return `${prefix(hours)}:${prefix(minutes)}:${prefix(seconds)}`;
+};
+
+export default {
+  toIsoStr,
+  dateMap,
+  projectCalendar,
+  timeSum,
+  timeDiff,
+  convertTotalsec,
+};
