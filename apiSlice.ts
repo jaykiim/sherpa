@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { Project, KeyResult, Task, Record } from "./types";
+import { Project, KeyResult, Task, Record, Planner } from "./types";
 
 export const apiSlice = createApi({
   reducerPath: "api",
@@ -12,6 +12,7 @@ export const apiSlice = createApi({
     "KeyResult",
     "Task",
     "Records",
+    "Planners",
   ],
   endpoints: (builder) => ({
     //
@@ -152,6 +153,29 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ["Records", "Task"],
     }),
+
+    // TODO planners ================================================================================================================================================================================
+
+    getPlanners: builder.query<Planner[] | [], string>({
+      query: (plannerlist) => ({
+        url: `/planners/`,
+        method: "GET",
+        params: { plannerlist },
+      }),
+      providesTags: ["Planners"],
+    }),
+
+    updatePlanner: builder.mutation<
+      string,
+      { planner: Planner; projectId: string; selectedDate: string }
+    >({
+      query: ({ planner, projectId, selectedDate }) => ({
+        url: `/planners/${planner}`,
+        method: "PATCH",
+        body: { planner, projectId, selectedDate },
+      }),
+      invalidatesTags: ["Planners", "Project"],
+    }),
   }),
 });
 
@@ -170,4 +194,6 @@ export const {
   useGetRecordsQuery,
   useUpdateRecordMutation,
   useDeleteRecordMutation,
+  useGetPlannersQuery,
+  useUpdatePlannerMutation,
 } = apiSlice;

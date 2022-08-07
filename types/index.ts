@@ -31,6 +31,9 @@ export interface Project {
   start: string;
   end: string;
   keyresults: string[];
+  planners: {
+    [date: string]: string[];
+  };
 }
 
 /* ==========================================================================================================================================================================================================================================
@@ -93,6 +96,42 @@ export interface TimerInfo {
 export interface TaskTimerInfo {
   timerId: number;
   totalSec: number;
+}
+
+/* ==========================================================================================================================================================================================================================================
+* planners
+========================================================================================================================================================================================================================================== */
+
+export interface Planners {
+  [plannerId: string]: Planner;
+}
+
+export interface Planner {
+  id: string;
+  projectId: string;
+  comment: string;
+  date: string;
+  feedback: Feedbacks;
+  plan: Plans;
+}
+
+export interface Feedbacks {
+  [id: string]: Feedback;
+}
+
+export interface Feedback {
+  id: string;
+  content: string;
+}
+
+export interface Plans {
+  [id: string]: Plan;
+}
+
+export interface Plan {
+  id: string;
+  content: string;
+  done: boolean;
 }
 
 /* ==========================================================================================================================================================================================================================================

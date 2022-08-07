@@ -1,11 +1,18 @@
-import { Project, Projects } from "../types";
+import { Project } from "../types";
 
-const normalize = <T extends { id: string; [index: string]: any }>(
-  data: T[]
+const normalize = <T extends { [index: string]: any }>(
+  data: T[],
+  id: string
 ) => {
-  return data.reduce((acc, { id, ...props }) => {
-    return { ...acc, [id]: { id, ...props } };
+  // id 는 id 역할을 할 속성명임
+
+  return data.reduce<{ [index: string]: T }>((acc, cur) => {
+    return { ...acc, [cur[id]]: cur };
   }, {});
+};
+
+const denormalize = <T>(data: { [index: string]: T }) => {
+  return Object.entries(data).reduce<T[]>((a, c) => [...a, c[1]], []);
 };
 
 const sortProject = (projects: Project[]) => {
@@ -25,4 +32,4 @@ const sortProject = (projects: Project[]) => {
 const getRandomColor = () =>
   "#" + Math.round(Math.random() * 0xffffff).toString(16);
 
-export default { normalize, sortProject, getRandomColor };
+export default { normalize, denormalize, sortProject, getRandomColor };

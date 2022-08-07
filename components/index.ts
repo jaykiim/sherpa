@@ -17,6 +17,7 @@ export { default as DateSelector } from "./util/DateSelector";
 export { default as Modal } from "./util/Modal";
 export { default as DatePicker } from "./util/DatePicker";
 export { default as WeekPicker } from "./util/WeekPicker";
+export { default as ModalSubmitHeader } from "./util/ModalSubmitHeader";
 
 // projectInfo
 export { default as Objective } from "./projectInfo/Objective";
@@ -41,6 +42,12 @@ export { default as NoTools } from "./tools/NoTools";
 
 // planner
 export { default as PlannerContainer } from "./planner/PlannerContainer";
+export { default as DayCardContainer } from "./planner/DayCardContainer";
+export { default as DayCard } from "./planner/DayCard";
+export { default as FieldCard } from "./planner/FieldCard";
+export { default as TodaysComment } from "./planner/TodaysComment";
+export { default as Plan } from "./planner/Plan";
+export { default as Feedback } from "./planner/Feedback";
 
 // tasker
 export { default as TaskerContainer } from "./tasker/TaskerContainer";

@@ -31,7 +31,7 @@ const RecordContainer = ({ task, selectedDate, records }: Props) => {
     : [];
 
   const selectedDateRecords = records.filter(
-    (record) => recordIds.length && recordIds.includes(record.id)
+    (record) => recordIds?.length && recordIds.includes(record.id)
   ); // 빈 배열일 수 있음
 
   // * 현재 태스크 --> 선택 날짜 시간 합계 ---------------------------------------------------------------------------------------------------------------------------------------

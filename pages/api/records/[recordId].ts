@@ -34,8 +34,8 @@ export default async function handler(
 
         const updatedIds = selectedDateRecs
           ? selectedDateRecs.includes(record.id)
-            ? false
-            : [...taskDoc.records[selectedDate], record.id]
+            ? selectedDateRecs
+            : [...selectedDateRecs, record.id]
           : [record.id];
 
         if (updatedIds) {

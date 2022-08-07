@@ -87,13 +87,10 @@ const WeekPicker = ({ start, end, selectedDate, setSelectedDate }: Props) => {
       //
       else if (field === "month") {
         const clickedYearMonth = new Date(year, clicked - 1, 1);
-        console.log("선택 연월", clickedYearMonth);
 
         // 클릭한 월의 프로젝트 달력 (일주일 단위로 묶인 2차원 배열)
         const { calendarByWeek: clickedMonthDaysByWeek } =
           moment.projectCalendar(clickedYearMonth, start, end);
-
-        console.log(clickedMonthDaysByWeek);
 
         // 클릭한 월에 weekNum 존재 여부
         const clickedMonthCurrentWeekExists =
@@ -119,11 +116,7 @@ const WeekPicker = ({ start, end, selectedDate, setSelectedDate }: Props) => {
           (date) => typeof date !== "string"
         ) as number[];
 
-        console.log("선택한 주의 날짜 목록", week);
-
         newDate = new Date(year, month - 1, week[0]);
-
-        console.log("바뀐 날짜", newDate);
       }
 
       setSelectedDate(newDate);
