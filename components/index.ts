@@ -27,6 +27,7 @@ export { default as ProjectsNav } from "./projectInfo/ProjectsNav";
 export { default as ProjectMenu } from "./projectInfo/ProjectMenu";
 export { default as ProjectCard } from "./projectInfo/ProjectCard";
 export { default as NewProjectForm } from "./projectInfo/NewProjectForm";
+export { default as DeleteProjectForm } from "./projectInfo/DeleteProjectForm";
 
 // keyresult
 export { default as KeyResult } from "./keyresult/KeyResult";

@@ -27,8 +27,8 @@ const TimerContainer = ({ project, tasks }: Props) => {
   // 프로젝트 기간
   const { start, end } = project;
 
-  // 종료된 프로젝트인지?
-  const isClosed = today > new Date(end);
+  // 종료된 (또는 아직 시작 안한) 프로젝트인지?
+  const isClosed = today > new Date(end) || today < new Date(start);
 
   // 클릭 날짜 기본값
   const defaultDate = isClosed ? new Date(project.start) : today;

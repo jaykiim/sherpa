@@ -59,6 +59,18 @@ export const apiSlice = createApi({
       invalidatesTags: ["Projects", "Project", "User"],
     }),
 
+    deleteProject: builder.mutation<
+      string,
+      { userId: string; projectId: string }
+    >({
+      query: ({ userId, projectId }) => ({
+        url: `/projects/${projectId}`,
+        method: "DELETE",
+        body: { userId, projectId },
+      }),
+      invalidatesTags: ["Projects", "User"],
+    }),
+
     // TODO keyresults ================================================================================================================================================================================
 
     getKeyResults: builder.query<KeyResult[], string>({
@@ -185,6 +197,7 @@ export const {
   useGetProjectsQuery,
   useGetProjectQuery,
   useUpdateProjectMutation,
+  useDeleteProjectMutation,
   useGetKeyResultsQuery,
   useGetKeyResultQuery,
   useUpdateKeyResultsMutation,

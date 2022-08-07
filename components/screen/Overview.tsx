@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 // components
@@ -10,9 +10,10 @@ import {
   useGetProjectQuery,
   useUpdateProjectMutation,
 } from "../../apiSlice";
-import { KeyResult, Project } from "../../types";
+import { KeyResult, Project, RootProps } from "../../types";
+import { ModalContext } from "../util/Modal";
 
-const Overview = () => {
+const Overview = ({ setModal }: RootProps) => {
   //
   // 프로젝트 아이디
   const { id } = useRouter().query;
@@ -94,6 +95,19 @@ const Overview = () => {
               }
             />
           )}
+
+          <button
+            onClick={() =>
+              setModal!({
+                desc: "deleteProject",
+                size: "w-11/12 sm:w-3/4 max-w-[500px] h-[30%] max-h-[300px] ",
+                open: true,
+              })
+            }
+            className="ml-auto bg-red-700 text-gray-50 py-1 px-2 text-sm rounded-md hover:bg-red-600"
+          >
+            프로젝트 삭제
+          </button>
         </>
       )}
     </div>

@@ -36,7 +36,7 @@ const Period = ({ defaultVal, input, setInput, onSubmit }: Props) => {
               setWrite(false);
               setInput(defaultVal);
             }}
-            disable={!input}
+            disable={!input || new Date(input.start) > new Date(input.end)}
           />
         )}
       </Subheading>

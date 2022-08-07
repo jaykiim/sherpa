@@ -1,4 +1,4 @@
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { deleteDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { NextApiRequest, NextApiResponse } from "next";
 import { db } from "../../../lib/firebase";
 import { User } from "../../../types";
@@ -50,6 +50,30 @@ export default async function handler(
           projects: [...userDoc.projects, project.id],
         });
       }
+
+      res.status(200).json("success");
+      //
+    } catch (error) {
+      //
+      console.log(error);
+      res.status(500).json(error);
+    }
+  } else if (req.method === "DELETE") {
+    try {
+      //
+      const { userId, projectId } = req.body;
+
+      const docRef = doc(db, "projects", projectId as string);
+      await deleteDoc(docRef);
+
+      // 기존 user 문서 가져오기
+      const userRef = doc(db, "users", userId);
+      const snap = await getDoc(userRef);
+      const userDoc = snap.data() as User;
+
+      await updateDoc(userRef, {
+        projects: userDoc.projects.filter((id) => id !== projectId),
+      });
 
       res.status(200).json("success");
       //

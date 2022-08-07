@@ -65,6 +65,7 @@ const NewProjectForm = () => {
       start: period.start,
       end: period.end,
       keyresults: krId,
+      planners: {},
     };
 
     try {

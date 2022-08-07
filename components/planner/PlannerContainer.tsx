@@ -1,34 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import React, { useState } from "react";
 
 // components
 import { Subheading, WeekPicker, DayCardContainer } from "../";
 
 // hooks
-import { useGetProjectQuery } from "../../apiSlice";
+import { Project } from "../../types";
 
 const today = new Date();
 
-const PlannerContainer = () => {
+interface Props {
+  project: Project;
+}
+
+const PlannerContainer = ({ project }: Props) => {
   //
-  // * project 정보 패치 ------------------------------------------------------------------------------------------------------------------------------------------------
+  // * 선택된 날짜 ------------------------------------------------------------------------------------------------------------------------------------------------
 
-  const { id: projectId } = useRouter().query;
-  const { data: project } = useGetProjectQuery(projectId as string);
+  const defaultDate =
+    today > new Date(project.end) || today < new Date(project.start)
+      ? new Date(project.start)
+      : today;
 
-  // * week picker ------------------------------------------------------------------------------------------------------------------------------------------------
-
-  // 선택된 날짜
-  const [selectedDate, setSelectedDate] = useState(today);
-
-  // 기본적으로 오늘 날짜의 플래너를 보여주고, 만약 종료된 프로젝트면 프로젝트 시작일의 날짜를 기본값을 함
-  useEffect(() => {
-    if (project) {
-      const defaultDate =
-        today > new Date(project.end) ? new Date(project.start) : today;
-      setSelectedDate(defaultDate);
-    }
-  }, [project]);
+  const [selectedDate, setSelectedDate] = useState(defaultDate);
 
   // * 일간/주간 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

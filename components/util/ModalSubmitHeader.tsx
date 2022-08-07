@@ -4,13 +4,16 @@ interface Props {
   title: string;
   disabled: boolean;
   onSubmit: () => Promise<void>;
+  style?: string;
 }
 
-const ModalSubmitHeader = ({ title, disabled, onSubmit }: Props) => {
+const ModalSubmitHeader = ({ title, disabled, onSubmit, style }: Props) => {
   //
 
   return (
-    <section className="flex items-center border-b border-gray-light ">
+    <section
+      className={`flex items-center border-b border-gray-light ${style}`}
+    >
       <h1 className="p-3 font-bold uppercase sm:text-lg">{title}</h1>
 
       <button

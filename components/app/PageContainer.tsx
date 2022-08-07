@@ -8,10 +8,13 @@ import {
   Modal,
   NewProjectForm,
   ToolsSettingForm,
+  DeleteProjectForm,
+  Drawer,
+  Header,
+  Login,
 } from "../";
 
-// components
-import { Drawer, Header, Login } from "../index";
+// types
 import { Modal as ModalType } from "../../types";
 
 interface Props {
@@ -41,6 +44,9 @@ const PageContainer = ({ children, projectId }: Props) => {
 
       case "tools":
         return <ToolsSettingForm />;
+
+      case "deleteProject":
+        return <DeleteProjectForm />;
     }
   };
 

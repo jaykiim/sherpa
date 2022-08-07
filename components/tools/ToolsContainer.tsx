@@ -1,7 +1,9 @@
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 // components
 import { PlannerContainer, TaskerContainer, ToolsMenu, NoTools } from "../";
+import { useGetProjectQuery, useGetTasksQuery } from "../../apiSlice";
 
 // types
 import { KeyResult, Modal } from "../../types";
@@ -19,11 +21,16 @@ const ToolsContainer = ({ selectedKr, setModal }: Props) => {
     setSelectedMenu(selectedKr.tools[0]);
   }, [selectedKr]);
 
+  // * project 정보 패치 ------------------------------------------------------------------------------------------------------------------------------------------------
+
+  const { id: projectId } = useRouter().query;
+  const { data: project } = useGetProjectQuery(projectId as string);
+
   // selectedMenu 에 따라 보여줄 컴포넌트
   const showTool = () => {
     switch (selectedMenu) {
       case "planner":
-        return <PlannerContainer />;
+        return <PlannerContainer project={project!} />;
 
       case "tasker":
         return <TaskerContainer />;
@@ -59,7 +66,7 @@ const ToolsContainer = ({ selectedKr, setModal }: Props) => {
         ⚠️ PLANNER 도구는 KEY RESULTS 와 무관합니다
       </p>
 
-      <div className="mt-7">{showTool()}</div>
+      <div className="mt-7">{project && showTool()}</div>
     </div>
   );
 };
