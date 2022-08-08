@@ -2,6 +2,7 @@ import { deleteDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { NextApiRequest, NextApiResponse } from "next";
 import { db } from "../../../lib/firebase";
 import { Task } from "../../../types";
+import { moment, toolkit } from "../../../utils";
 
 export default async function handler(
   req: NextApiRequest,
@@ -17,35 +18,36 @@ export default async function handler(
       const docRef = doc(db, "records", record.id as string);
       await setDoc(docRef, record);
 
-      // * 새로 등록하는 경우 --> task 문서 records 필드 수정 ---------------------------------------------------------------------------------------------------
+      // 기존 task 문서 가져오기
+      const taskRef = doc(db, "tasks", taskId);
+      const snap = await getDoc(taskRef);
+      const taskDoc = snap.data() as Task;
 
-      if (taskId && selectedDate) {
-        // 기존 task 문서 가져오기
-        const taskRef = doc(db, "tasks", taskId);
-        const snap = await getDoc(taskRef);
-        const taskDoc = snap.data() as Task;
+      // task --> records --> 현재 날짜 record id 배열
+      const selectedDateRecs = taskDoc.records[selectedDate];
 
-        // task --> records --> 현재 날짜 record id 배열
-        const selectedDateRecs = taskDoc.records[selectedDate];
+      // 현재 날짜 records id 배열 존재 && 그 중에 현재 record.id 존재 ---> 아무것도 안함
+      // 현재 날짜 records id 배열 존재 but 현재 record.id 미존재 ---> 기존 배열에 현재 id 추가
+      // 현재 날짜 미존재 --> 새로운 배열
 
-        // 현재 날짜 records id 배열 존재 && 그 중에 현재 record.id 존재 ---> 아무것도 안함
-        // 현재 날짜 records id 배열 존재 but 현재 record.id 미존재 ---> 기존 배열에 현재 id 추가
-        // 현재 날짜 미존재 --> 새로운 배열
+      const updatedIds = selectedDateRecs
+        ? selectedDateRecs.includes(record.id)
+          ? selectedDateRecs
+          : [...selectedDateRecs, record.id]
+        : [record.id];
 
-        const updatedIds = selectedDateRecs
-          ? selectedDateRecs.includes(record.id)
-            ? selectedDateRecs
-            : [...selectedDateRecs, record.id]
-          : [record.id];
+      // 새로운 시간 합계
+      const taskActualTIme = taskDoc.actualTime
+        ? taskDoc.actualTime
+        : "00:00:00";
+      const timeSum = moment.timeSum([taskActualTIme, record.time]);
 
-        if (updatedIds) {
-          await updateDoc(taskRef, {
-            records: {
-              [selectedDate]: updatedIds,
-            },
-          });
-        }
-      }
+      await updateDoc(taskRef, {
+        records: {
+          [selectedDate]: updatedIds,
+        },
+        actualTime: timeSum,
+      });
 
       res.status(200).json("success");
       //
@@ -59,9 +61,9 @@ export default async function handler(
   else if (req.method === "DELETE") {
     try {
       //
-      const { recordId, taskId, selectedDate } = req.body;
+      const { record, taskId, selectedDate } = req.body;
 
-      const docRef = doc(db, "records", recordId);
+      const docRef = doc(db, "records", record.id as string);
       await deleteDoc(docRef);
 
       const taskRef = doc(db, "tasks", taskId);
@@ -71,17 +73,18 @@ export default async function handler(
       // task --> records --> 현재 날짜 record id 배열
       const selectedDateRecs = taskDoc.records[selectedDate];
 
-      // 현재 날짜 record id 배열 존재 && 그 중에 현재 recordId 존재 ---> recordId 없애기
-      if (selectedDateRecs && selectedDateRecs.includes(recordId)) {
-        const newRecordIdlist = selectedDateRecs.filter(
-          (id) => id !== recordId
-        );
-        await updateDoc(taskRef, {
-          records: {
-            [selectedDate]: newRecordIdlist,
-          },
-        });
-      }
+      // task --> records --> 현재 날짜 배열에 현재 record id 없애기
+      const newRecordIdlist = selectedDateRecs.filter((id) => id !== record.id);
+
+      // task --> actualTime 수정
+      const actualTime = moment.timeDiff(taskDoc.actualTime, record.time);
+
+      await updateDoc(taskRef, {
+        records: {
+          [selectedDate]: newRecordIdlist,
+        },
+        actualTime,
+      });
 
       res.status(200).json("success");
       //

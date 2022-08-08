@@ -51,7 +51,7 @@ const Record = ({ record, taskId, selectedDate }: Props) => {
   const onDelete = async () => {
     try {
       await deleteRecord({
-        recordId: record.id,
+        record,
         taskId,
         selectedDate: selectedDate.toLocaleDateString(),
       });

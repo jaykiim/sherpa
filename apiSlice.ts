@@ -156,12 +156,12 @@ export const apiSlice = createApi({
 
     deleteRecord: builder.mutation<
       string,
-      { recordId: string; taskId: string; selectedDate: string }
+      { record: Record; taskId: string; selectedDate: string }
     >({
-      query: ({ recordId, taskId, selectedDate }) => ({
-        url: `/records/${recordId}`,
+      query: ({ record, taskId, selectedDate }) => ({
+        url: `/records/${record.id}`,
         method: "DELETE",
-        body: { recordId, taskId, selectedDate },
+        body: { record, taskId, selectedDate },
       }),
       invalidatesTags: ["Records", "Task"],
     }),
