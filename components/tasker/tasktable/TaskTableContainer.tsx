@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { nanoid } from "@reduxjs/toolkit";
 
 // components
 import { Subheading, BtnEdit, TableHead, TableRow, BtnNewField } from "../../";
 
 // hooks
-import { useGetTasksQuery, useUpdateTasksMutation } from "../../../apiSlice";
+import { useUpdateTasksMutation } from "../../../apiSlice";
 
 // types
 import { Task } from "../../../types";
@@ -125,9 +125,9 @@ const TaskTableContainer = ({ tasks }: Props) => {
               key={task.id}
               task={task}
               write={write}
-              taskInputs={taskInputs}
               setTaskInputs={setTaskInputs}
               onTaskChange={onTaskChange}
+              defaultTasks={tasks}
             />
           ))
         : tasks.map((task) => (
@@ -135,7 +135,7 @@ const TaskTableContainer = ({ tasks }: Props) => {
               key={task.id}
               task={task}
               write={write}
-              taskInputs={taskInputs}
+              defaultTasks={tasks}
               setTaskInputs={setTaskInputs}
               onTaskChange={onTaskChange}
               onSubmit={onSubmit}

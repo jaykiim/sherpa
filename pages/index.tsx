@@ -1,9 +1,10 @@
+import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { getServerSideProps } from "../lib/serverprops";
 import Head from "next/head";
 
 // components
-import { PageContainer } from "../components";
+import { PageContainer, ProjectList } from "../components";
 
 // hooks
 import { useGetUserQuery, useUpdateUserMutation } from "../apiSlice";
@@ -11,14 +12,12 @@ import { useGetUserQuery, useUpdateUserMutation } from "../apiSlice";
 // types
 import type { NextPage } from "next";
 import { User } from "../types";
-import ProjectList from "../components/projectInfo/ProjectList";
-import { useEffect } from "react";
 
 const Home: NextPage = () => {
   //
   // 유저 조회
   const { data: session } = useSession();
-  const { data: user, isLoading } = useGetUserQuery(session!.user.uid);
+  const { data: user, isLoading } = useGetUserQuery(session?.user.uid);
 
   // * 유저 정보 없는 경우 ----------------------------------------------------------------------------------------------------------------
   // 로딩 중이지도 않은데 user === undefined
@@ -45,8 +44,8 @@ const Home: NextPage = () => {
   };
 
   useEffect(() => {
-    addUser();
-  }, [user]);
+    if (session) addUser();
+  }, [user, session]);
 
   return (
     <div className="min-h-screen">

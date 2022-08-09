@@ -9,7 +9,7 @@ import { Task } from "../../../types";
 interface Props {
   task: Task;
   write?: boolean;
-  taskInputs: Task[];
+  defaultTasks: Task[]; // 수정 모드일 때만 넘어옴
   setTaskInputs: (value: React.SetStateAction<Task[]>) => void;
   onTaskChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit?: (updatedTask: Task[]) => () => Promise<void>;
@@ -19,7 +19,7 @@ const TableRow = ({
   task,
   write,
   onTaskChange,
-  taskInputs,
+  defaultTasks,
   setTaskInputs,
   onSubmit,
 }: Props) => {
@@ -31,7 +31,7 @@ const TableRow = ({
   };
 
   const onDoneClick = async () => {
-    const updatedTask = taskInputs.map((item) =>
+    const updatedTask = defaultTasks.map((item) =>
       item.id === task.id ? { ...item, done: !item.done } : item
     );
 

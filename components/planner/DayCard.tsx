@@ -104,7 +104,9 @@ const DayCard = ({
     try {
       //
       const updatedPlanner: Planner = {
-        ...currentPlanner,
+        id: currentPlanner?.id || nanoid(),
+        projectId: currentPlanner?.projectId || (projectId as string),
+        date: currentPlanner?.date || selectedDate.toLocaleDateString(),
         comment,
         feedback: toolkit.normalize(feedback, "id"),
         plan: toolkit.normalize(plan, "id"),
