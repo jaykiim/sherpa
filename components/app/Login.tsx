@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
-import { signIn } from "next-auth/react";
+import Router from "next/router";
+import { signIn, useSession } from "next-auth/react";
 
 // styles
 import facebook from "../../public/facebook.png";
@@ -9,6 +10,9 @@ import google from "../../public/google.png";
 import twitter from "../../public/twitter.png";
 
 const Login = () => {
+  const { data: session } = useSession();
+  if (session) Router.push("/");
+
   const onLogoClick = (provider: string) =>
     signIn(provider, { callbackUrl: "/" });
 
