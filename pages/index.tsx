@@ -1,7 +1,7 @@
+import Head from "next/head";
 import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { getServerSideProps } from "../lib/serverprops";
-import Head from "next/head";
 
 // components
 import { PageContainer, ProjectList } from "../components";
