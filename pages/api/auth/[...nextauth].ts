@@ -11,6 +11,9 @@ export default NextAuth({
     secret: process.env.NEXT_PUBLIC_SECRET,
   },
   debug: process.env.NODE_ENV === "development",
+  pages: {
+    signIn: "/",
+  },
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
