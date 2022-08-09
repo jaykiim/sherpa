@@ -16,7 +16,6 @@ import {
 
 // types
 import { Modal as ModalType } from "../../types";
-import { useRouter } from "next/router";
 
 interface Props {
   children: React.ReactNode;
@@ -26,7 +25,6 @@ interface Props {
 
 const PageContainer = ({ children, projectId }: Props) => {
   //
-  const router = useRouter();
   const { data: session } = useSession();
 
   // 모달 열림 닫힘
@@ -67,7 +65,7 @@ const PageContainer = ({ children, projectId }: Props) => {
       });
   });
 
-  if (!session) router.push("/login");
+  if (!session) return <Login />;
 
   return (
     <div className="min-h-screen">
