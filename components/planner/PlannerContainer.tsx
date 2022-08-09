@@ -3,7 +3,7 @@ import React, { useState } from "react";
 // components
 import { Subheading, WeekPicker, DayCardContainer } from "../";
 
-// hooks
+// types
 import { Project } from "../../types";
 
 const today = new Date();

@@ -12,9 +12,8 @@ export default async function handler(
   if (req.method === "PATCH") {
     try {
       //
-      const { record, taskId, selectedDate } = req.body; // 새로운 id의 레코드일수도 있음
+      const { record, taskId, selectedDate } = req.body;
 
-      // 기존 문서 업데이트 혹은 새로 저장
       const docRef = doc(db, "records", record.id as string);
       await setDoc(docRef, record);
 
@@ -30,11 +29,17 @@ export default async function handler(
       // 현재 날짜 records id 배열 존재 but 현재 record.id 미존재 ---> 기존 배열에 현재 id 추가
       // 현재 날짜 미존재 --> 새로운 배열
 
-      const updatedIds = selectedDateRecs
-        ? selectedDateRecs.includes(record.id)
-          ? selectedDateRecs
-          : [...selectedDateRecs, record.id]
-        : [record.id];
+      console.log("taskDoc.records", taskDoc.records);
+      console.log("selectedDateRecs", selectedDateRecs);
+
+      const updatedRecords = selectedDateRecs
+        ? {
+            ...taskDoc.records,
+            [selectedDate]: [...selectedDateRecs, record.id],
+          }
+        : { ...taskDoc.records, [selectedDate]: [record.id] };
+
+      console.log("updatedRecords", updatedRecords);
 
       // 새로운 시간 합계
       const taskActualTIme = taskDoc.actualTime
@@ -43,9 +48,7 @@ export default async function handler(
       const timeSum = moment.timeSum([taskActualTIme, record.time]);
 
       await updateDoc(taskRef, {
-        records: {
-          [selectedDate]: updatedIds,
-        },
+        records: updatedRecords,
         actualTime: timeSum,
       });
 
