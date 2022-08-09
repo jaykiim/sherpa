@@ -12,7 +12,7 @@ export default NextAuth({
   },
   debug: process.env.NODE_ENV === "development",
   pages: {
-    signIn: "/",
+    signIn: "/login",
   },
   providers: [
     GoogleProvider({
