@@ -1,27 +1,22 @@
-# Next.js + Tailwind CSS Example
+<img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=Next.js&logoColor=white"> <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white"> <img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=Firebase&logoColor=white"> <img src="https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=TailwindCSS&logoColor=white">
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+`주요 코드` https://cyan-leech-405.notion.site/Sherpa-ebad125a9adb41ba96bff82e590fcb40
 
-## Deploy your own
+## What is Sherpa 
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+Sherpa 는 조직의 성과와 목표 관리를 위한 프레임 워크 중 하나인 [OKR](https://www.salesforce.com/kr/hub/organization/what-is-okr/) 을 개인의 목표 달성에 적용할 수 있도록 돕는 툴입니다.  
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+![readme1](https://user-images.githubusercontent.com/81809559/183916762-83a2c7c1-932a-49f2-87e4-93d427342d34.png)
 
-## How to use
+![readme2](https://user-images.githubusercontent.com/81809559/183916918-ff74924e-b111-4676-9d76-4005dded1540.png)
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+## Features
 
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-```
+Tools 는 핵심 목표 (Key Results) 달성을 돕는 도구를 모아놓은 페이지입니다. 
 
-```bash
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
+![image](https://user-images.githubusercontent.com/81809559/183923263-e59ccb55-aed1-49b3-a4af-6c4763052152.png)
 
-```bash
-pnpm create next-app --example with-tailwindcss with-tailwindcss-app
-```
+도구 사용 설정 창을 열어 자신의 핵심 목표에 맞는 형태의 도구만 선택할 수 있습니다.
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+
+
