@@ -1,12 +1,12 @@
 ## Info
 
-`주소` https://sherpa-puce.vercel.app/  
-
-`주요 코드` https://cyan-leech-405.notion.site/Sherpa-ebad125a9adb41ba96bff82e590fcb40  
-
-`제작 기간` 2022.08.02 ~ 2022.08.11
-
 <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=Next.js&logoColor=white"> <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=TypeScript&logoColor=white"> <img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white"> <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=Firebase&logoColor=white"> <img src="https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=TailwindCSS&logoColor=white"> 
+
+- `주소` https://sherpa-puce.vercel.app/  
+
+- `주요 코드` https://cyan-leech-405.notion.site/Sherpa-ebad125a9adb41ba96bff82e590fcb40  
+
+- `제작 기간` 2022.08.02 ~ 2022.08.11
 
 ## What is Sherpa
 
