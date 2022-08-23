@@ -3,7 +3,7 @@ import { TaskTimerInfo, TimerInfo } from "../types";
 import { moment } from "../utils";
 
 interface Props {
-  timeInit: string; // 00:00:00 형식
+  timeInit: string; // 00:00:00 형식 (초기 시각)
   taskId: string; // 어떤 태스크의 타이머인지 식별하기 위해
 }
 

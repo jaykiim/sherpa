@@ -35,4 +35,4 @@ const Modal = ({ children, modal, setModal }: Props) => {
   );
 };
 
-export default Modal;
+export default React.memo(Modal);

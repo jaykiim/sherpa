@@ -58,7 +58,7 @@ const Carousel = ({ children, btnRef }: CarouselProps) => {
     const val = parseInt(getContentWidth().split("/")[1]);
     const cardsToShow = val ? val : 1; // 현재 브라우저 너비에서 한 번에 보여줄 카드 갯수
 
-    // 한 번에 보일 카드 수 + 첫 카드 번호 < 전체 컨텐츠 (카드) 갯수면 마지막까지 보여준거니까 더 이상 안움직임
+    // 한 번에 보일 카드 수 + 첫 카드 번호 >= 전체 컨텐츠 (카드) 갯수면 마지막까지 보여준거니까 더 이상 안움직임
     if (cardsToShow + Math.abs(btnCounter) < React.Children.count(children))
       setBtnCounter(btnCounter - 1);
   };

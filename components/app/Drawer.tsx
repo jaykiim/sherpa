@@ -1,6 +1,6 @@
 import React, { createContext, Dispatch, SetStateAction } from "react";
 import { LogoutIcon } from "@heroicons/react/outline";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 
 export const DrawerContext =
@@ -43,7 +43,10 @@ const Drawer = ({ children, drawer, setDrawer }: DrawerProps) => {
             <p>반갑습니다, {session!.user.name}님</p>
           </div>
 
-          <div className="hoverAnimation w-7 h-7 center-xy p-0">
+          <div
+            className="hoverAnimation w-7 h-7 center-xy p-0"
+            onClick={() => signOut()}
+          >
             <LogoutIcon className="w-5 h-5" />
           </div>
         </div>
@@ -63,4 +66,4 @@ const Drawer = ({ children, drawer, setDrawer }: DrawerProps) => {
   );
 };
 
-export default Drawer;
+export default React.memo(Drawer);

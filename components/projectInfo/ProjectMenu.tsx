@@ -84,4 +84,4 @@ const ProjectMenu = ({ projectId, detail }: Props) => {
   );
 };
 
-export default ProjectMenu;
+export default React.memo(ProjectMenu);
